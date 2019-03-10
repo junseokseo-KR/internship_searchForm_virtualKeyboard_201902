@@ -1,0 +1,36 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+
+/* 나눔스퀘어 */
+@font-face{
+	font-family:'NanumSquareR';
+	font-weight: normal;
+    font-style: normal;
+	src:url("../images/NanumSquareR.eot");
+	src:url("../images/NanumSquareR.eot?#iefix") format('embedded-opentype'),
+		url("../images/NanumSquareR.woff") format('woff'),
+		url("../images/NanumSquareR.ttf") format('truetype');
+}
+@font-face{
+	font-family:'NanumSquareB';
+	font-weight: normal;
+    font-style: normal;
+	src:url("../images/NanumSquareB.eot");
+	src:url("../images/NanumSquareB.eot?#iefix") format('embedded-opentype'),
+		url("../images/NanumSquareB.woff") format('woff'),
+		url("../images/NanumSquareB.ttf") format('truetype');
+}
+@font-face{
+	font-family:'NanumSquareEB';
+	font-weight: normal;
+    font-style: normal;
+	src:url("../images/NanumSquareEB.eot");
+	src:url("../images/NanumSquareEB.eot?#iefix") format('embedded-opentype'),
+		url("../images/NanumSquareEB.woff") format('woff'),
+		url("../images/NanumSquareEB.ttf") format('truetype');
+}

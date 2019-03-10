@@ -1,0 +1,15 @@
+div.lightBox{background: linear-gradient(to top, #525658, #3b3c3d);box-shadow: inset 1px 1px 1px 1px #aeafb1;position: absolute;top: 10px;left: 300px;z-index: 999;height: 150px;width: 480px;line-height: 150px;}
+div.lightBox > button.lightClose{background: rgb(237, 94, 104);color: #FFF;position: absolute;left: 450px;top: 1px;font-size: 1.5rem;width: 30px;z-index: 9999;box-shadow: inset 1px 1px 3px 2px rgb(190, 73, 81);}
+div.lightBox > button.lightClose:hover{background: rgb(235, 103, 112);box-shadow: inset 1px 1px 3px 2px rgb(187, 84, 91);}
+div.lightBox > div.lightTable > input.lightInput{width: 450px;height: 50px;position: relative;left: 0;top: 0;border: 0;text-align: center;margin-bottom: 5px;background: #f2f2f2;box-shadow: inset 1px 1px 3px 2px #c3c5d0;font-size: 28px;font-weight: bold;color: #14191d;}
+div.lightBox > div.lightTable{position: absolute;left: 3%;border-spacing: 10px;border-collapse: separate;}
+div.listBox > table.listTable{width: 270px;height: 0px;text-align: center;position: absolute;top: 0px;left: 0px;z-index: 999;overflow: scroll;}
+div.listBox > table.listTable > thead > tr >th.listHead{background: #5068e6;border: 2px solid #283da9;box-shadow: inset 1px 1px 0px 0px #fff;font-size: 1.5rem;letter-spacing: 5px;color: #fff;height: 40px;line-height: 40px;}
+div.listBox > table.listTable > tbody{height: 439px;overflow: auto;display: block;}
+div.listBox > table.listTable > tbody > tr{background: #f2f2f2;border-bottom: 1px solid rgb(0,0,0);box-shadow: inset 1px 1px 3px 2px #c3c5d0;font-weight: bold;}
+div.listBox > table.listTable > tbody > tr > td.listItem{height: 60px;width: 700px;font-size: 1.7rem;}
+div.listBox > table.listTable > tbody > tr > td.no {height: 438px;width: 700px;font-size: 1.7rem;}
+div.listBox > table.listTable > tbody > tr > td.listItem:hover{background: rgb(180, 180, 180);}
+div.listBox > table.listTable > tbody > tr > td.listItem:active{background-color: rgb(64, 151, 254);color: #fff;}
+div.lightBg{background-color: #000;position: absolute;top: 0;left: 0;z-index: 998;height: 480px;width: 800px;opacity: 0.7;}
+div.lightBg, div.lightBox, div.listBox, div#keyboard{display: none;}

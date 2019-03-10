@@ -1,0 +1,285 @@
+<!--Name : setting.html
+Modify Date : 2018. 09. 21   11:43
+Modify contents : 로컬스토리지 적용(알람ON/OFF)완료, 금형품번저장후 메인에 표시된 금형을 다시 생산정보설정 셀렉트에서 표현, 탭디자인 적용, 금형 검색 및 선택 적용
+Developer : KIm gyoungmo, Han hyeogjong, Seo junseok
+
+-->
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="PPCMS"/>
+    <meta name="description" content="PPCMS 페이지입니다."/>
+    <meta name="keywords" content="PPCMS"/>
+    <meta name="copyright" content="이파로스, 도영ICT"/>
+    <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="css/checkbox-switch-custom.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/mold-selector.css">  <!-- ppcms 금형 선택 CSS -준석 -->
+    <link rel="stylesheet" type="text/css" href="./css/jkeyboard.css">  <!-- 제이쿼리 키보드 플러그인 CSS -준석 -->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPCMS setting</title>
+    <style>
+        /* 탭 관련 임시 디자인 */
+        #loading-wrap{display:none;}
+
+        #tab-title-wrap {
+            overflow: hidden;
+            padding: 0 !important;
+        }
+
+        #tab-title-wrap li {
+            float: left;
+        }
+
+        .tab-title {
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #000;
+
+            background: #FFF;
+            border: 1px solid #FFF;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .tab-title-active {
+            background: #000 !important;
+            color: #FFF !important;
+        }
+
+        .h52 th {
+            text-align: center !important;
+        }
+    </style>
+</head>
+
+<body>
+<div id="m_allWrap">
+    <div id="loading-wrap">
+        <div class="loader"></div>
+    </div>
+    <ul class="skip_navi_w">
+        <li class="skip_navi"><a href="#head_w" class="skip_nv">상단 바로가기</a></li>
+        <li class="skip_navi"><a href="#con_w" class="skip_nv">본문 바로가기</a></li>
+    </ul>
+
+    <header>
+        <div id="head_w">
+            <h2 class="hiddenTxt">상단 영역</h2>
+            <h3 class="title">생산정보 </h3>
+            <p class="date"><span id="clock"></span></p>
+            <!-- <p class="btn_on"><img src="images/layout/btn_on.png" alt="on" class="v-a-m mr-10">가동</p> -->
+            <!--<p class="btn_on"><img src="images/layout/btn_off.png" alt="off" class="v-a-m mr-10">비가동</p>-->
+        </div>
+    </header>
+    <section id="alert-wrap" class="dn">
+        <div class="pop_w">
+            <h2 class="hiddenTxt">메세지창</h2>
+            <div class="pop_msg">
+                <p class="tit" id="alert-message" style="font-size: 30px;">종료하시겠습니까?</p>
+                <ul class="btn_w">
+                    <li><input type="button" value="예" class="b_yes" id="alert-ok-btn"></li>
+                    <li><input type="button" value="아니오" class="b_no" id="alert-cancel-btn"></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="alert-wrap-one" class="dn">
+        <div class="pop_w">
+            <h2 class="hiddenTxt">메세지창</h2>
+            <div class="pop_msg">
+                <p class="tit" id="alert-message-one" style="font-size: 30px;">종료하시겠습니까?</p>
+                <ul class="btn_w">
+                    <div class="btn_one_w"><input type="button" value="확인" class="btn_one" id="alert-one-btn"></div>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="con_w">
+            <h2 class="hiddenTxt">컨텐츠 영역</h2>
+           <div class="box_w">
+						<article>
+							<h3 class="hiddenTxt">컨텐츠</h3>
+							<div class="table_w03 mt-20">
+								<table class="h42">
+									<tbody>
+									<tr>
+										<th class="w30" colspan="2">사출기 / 금형품번</th>
+										<td class="w30 bg02" id="miUID-wrap"></td>
+										<td class="w30" colspan="4">
+											<form name="search" action="sss" method="post">
+												<fieldset>
+                                                    <legend class="hiddenTxt">금형 검색</legend>
+                                                    <input type="text" id="mold-selector_view" name="search3" title="검색조건 선택"></input>
+                                                    <input type="hidden" id="mold-selector" name="search3" title="검색조건 선택"></input>
+												</fieldset>
+											</form>
+                                        </td>
+                                        <td class="w10">
+                                            <input type="button" value="검색" class="b_plus seletorBtn">
+                                        </td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div><!-- 탭 타이들 -->
+								<ul id="tab-title-wrap" class="tab_w">
+									<li class="tab_title tab_title_active"><a href="#">기업의 정보유출을</a></li>
+									<li class="tab_title"><a href="#"></a></li>
+								</ul>
+							</div>
+
+							<ul>
+								<li class="tab_content"><!-- 탭01 -->
+									<div class="table_w004">
+										<table class="h52">
+											<caption></caption>
+											<tbody>
+												<tr>
+													<th class="w30 " colspan="2">방지하기 위해</th>
+													<td class="w30 bg02" colspan="1" id="standard-cv">타직원이 작성한</td>
+													<td class="w40 bg02" colspan="4" id="standard-ct">스크립트 및</td>
+												</tr>
+												<tr>
+													<th class="w10" rowspan="2">서버 정보</th>
+													<th class="w20">코드들은</th>
+													<td class="w30"><input type="number" id="max-distance" name="timeSet22" title="0" class="td01" value="0"></td>
+													<td class="w10"><input type="button" value="＋" class="b_plus" id="max-distance-plus"></td>
+													<td class="w10"><input type="button" value="－" class="b_minus" id="max-distance-mi"></td>
+													<td class="w20" colspan="2"><input type="button" value="측정" class="b_meas"></td>
+												</tr>
+												<tr>
+													<th class="w20">삭제했습니다.</th>
+													<td class="w30"><input type="number" id="min-distance" name="timeSet33" title="0" class="td01" value="0"></td>
+													<td class="w10"><input type="button" value="＋" class="b_plus" id="min-distance-plus"></td>
+													<td class="w10"><input type="button" value="－" class="b_minus" id="min-distance-mi"></td>
+													<td class="w20" colspan="2"><input type="button" value="측정" class="b_meas"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</li>
+								<li class="tab_content dn"><!-- 탭02 -->
+									<div class="table_w004 mt-20">
+										<table class="h52">
+											<tbody>
+												<tr>
+													<th class="w10" rowspan="2"></th>
+													<th class="w20"></th>
+													<td class="w35"><input type="number" id="machineAlert" name="timeSet22" title="0" class="td01"></td>
+													<td class="w17h5"><input type="button" value="＋" class="b_plus" id="machine-alert-plus"></td>
+													<td class="w17h5"><input type="button" value="－" class="b_minus" id="machine-alert-mi"></td>
+												</tr>
+												<tr>
+													<th class="w20"></th>
+													<td class="w35"><input type="number" id="mold-ct-alert" name="timeSet22" title="0" class="td01"></td>
+													<td class="w17h5"><input type="button" value="＋" class="b_plus" id="mold-ct-alert-plus"></td>
+													<td class="w17h5"><input type="button" value="－" class="b_minus" id="mold-ct-alert-mi"></td>
+												</tr>
+												<tr>
+													<th class="w35" colspan="2"></th>
+
+													<td class="w17h5" colspan="3">
+														<div class="onoffswitch">
+															<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="alarm-on-off" >
+															<label class="onoffswitch-label" for="alarm-on-off">
+																<span class="onoffswitch-inner"></span>
+																<span class="onoffswitch-switch"></span>
+															</label>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</li>
+							</ul>
+						</article>
+					</div>
+        </div>
+    </section>
+
+    <footer>
+        <div id="footer_w">
+            <h2 class="hiddenTxt">버튼 영역</h2>
+            <ul class="btn_w">
+                <li><input type="button" value="저장" class="b_no" id="save-btn" style="float: left !important;"></li>
+                <li><input type="button" value="취소" class="b_yes" id="cancel-btn" style="float: right !important;"></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+<script>
+    //현재시각 script
+    function leadingZeros(n, digits) {
+        var zero = '';
+        n = n.toString();
+
+        if (n.length < digits) {
+            for (i = 0; i < digits - n.length; i++)
+                zero += '0';
+        }
+        return zero + n;
+    }
+
+    function printTime() {
+        var clock = document.getElementById("clock");            // 출력할 장소 선택
+        var now = new Date();                                                  // 현재시간
+        hours = now.getHours()
+        if (hours > 12) {
+            hours -= 12;
+            ampm = "PM";
+        }
+        else {
+            ampm = "AM";
+        }
+
+        var nowTime = now.getFullYear() + "-" + leadingZeros(now.getMonth() + 1, 2) + "-" + leadingZeros(now.getDate(), 2) + "   " + leadingZeros(now.getHours(), 2) + ":" +
+            leadingZeros(now.getMinutes(), 2) + ":" + leadingZeros(now.getSeconds(), 2) + " " + ampm;
+        clock.innerHTML = nowTime;           // 현재시간을 출력
+        setTimeout("printTime()", 1000);         // setTimeout(“실행할함수”,시간) 시간은1초의 경우 1000
+    }
+
+    window.onload = function () {                         // 페이지가 로딩되면 실행
+        printTime();
+    }
+</script>
+
+<!-- 금형 검색 및 선택 -->
+<div class="lightBox">
+    <button class="lightClose">X</button>
+    <div class="lightTable">
+        <input type="text" name="k_val" class="lightInput" placeholder="금형 번호">
+        <input type="hidden" name="k_val_no" id="k_val_no" value="">
+    </div>
+</div>
+<div class="listBox">
+    <table class="listTable">
+        <thead>
+            <tr>
+                <th class="listHead">금형 리스트</th>
+            </tr>
+        </thead>
+        <tbody class="listBody">
+        </tbody>
+    </table>
+</div>
+<div class="lightBg"></div>
+<div id="keyboard"></div>
+<script src="./js/jkeyboard.js"></script>   <!-- 제이쿼리 키보드 플러그인 -준석 -->
+<script type="text/javascript" src="./js/mold-selector.js"></script>    <!-- ppcms 금형 검색 스크립트 -준석 -->
+<!-- 금형 검색 및 선택 -->
+
+</body>
+</html>
